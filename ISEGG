@@ -1,11 +1,10 @@
-
 from tkinter import *
 import sqlite3
 import requests
 import urllib3
 
 root = Tk()
-root.title('??????')
+root.title('MElbeshti_ISE_GUEST_List_By_COMPANY')
 root.geometry('500x500')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -59,14 +58,14 @@ def sql_name(status1):
         name1 = aa
         z = name1
         #print("UserName", z)
-        url2 = "https://172.24.11.20:9060/ers/config/guestuser/" + status1 + "/name/" + z
+        url2 = "https://<YOUR ISE IP>:9060/ers/config/guestuser/" + status1 + "/name/" + z
         payload = {}
         headers2 = {
             'Accept': 'application/json',
             'cache-control': "no-cache",
             'Content-Type': 'application/json', }
         result2 = requests.request("PUT", url2, headers=headers2, data=payload, verify=False,
-                                    auth=('ers', '123456*mM'))
+                                    auth=('<ISE_USERNAME>', '<ISE_PASSWORD>'))
         #print("This User Hasbeen", status1, z)
         con.commit()
         return z
@@ -115,37 +114,20 @@ def show2():
     con.commit()
     rows = cursorObj.fetchall()
     numb = int(len(rows))
-    #print("-------------*-*-*-*-*", numb)
     a = []
     a.append(rows)
-    #print(a)
-    
-
     mytree = ttk.Treeview(root)
-    
     mytree['columns'] = ("Name", "Bank")
-    
     mytree.column("#0", width=0, minwidth=25)
     mytree.column("Name", anchor=W, width=120)
-    
     mytree.column("Bank", anchor=W, width=120)
-    
     mytree.heading("#0", text="", anchor=W)
     mytree.heading("Name", text="UserName", anchor=W)
-    
     mytree.heading("Bank", text="Bank Name", anchor=W)
-
     for i in range(0, numb):
         for record in a:
             mytree.insert(parent='', index='end', iid=i, text="", values=(record[i], show()))
-            
-    #add data
-    #mytree.insert(parent='', index='end', iid=0, text="Parent", values=(rows))
     mytree.grid(row=30, column=0)
-    
-
-    #print(s)
-
 
 def show3():
     myl2 = Label(root, text=str("----------------"), font=('Times New Roman', '18'), fg='white', bg='black')
@@ -155,55 +137,28 @@ def show3():
     
     myl1.grid(row=20, column=0)
     myl2.grid(row=25, column=0)
-    
+        
     cursorObj = con.cursor()
     cursorObj.execute('select name from company_name where company =?' , (show(),))
     con.commit()
     rows = cursorObj.fetchall()
-    
+    numb = int(len(rows))
+    a = []
+    a.append(rows)
     mytree = ttk.Treeview(root)
-    
-    mytree['columns'] = ("Name", "ID", "Bank")
-    
-    mytree.column("#0", width=120, minwidth=25)
+    mytree['columns'] = ("Name", "Bank")
+    mytree.column("#0", width=0, minwidth=25)
     mytree.column("Name", anchor=W, width=120)
-    mytree.column("ID", anchor=CENTER, width=80)
     mytree.column("Bank", anchor=W, width=120)
-    
-    mytree.heading("#0", text="Label", anchor=W)
+    mytree.heading("#0", text="", anchor=W)
     mytree.heading("Name", text="UserName", anchor=W)
-    mytree.heading("ID", text="ID", anchor=CENTER)
     mytree.heading("Bank", text="Bank Name", anchor=W)
-    
-    #add data
-    mytree.insert(parent='', index='end', iid=0, text="Parent", values=(rows,))
-    mytree.grid(row=40, column=0)
-    
+    for i in range(0, numb):
+        for record in a:
+            mytree.insert(parent='', index='end', iid=i, text="", values=(record[i], show()))
+    mytree.grid(row=30, column=0)
 
-    #print(r)
 
-'''
-def show4():
-
-    
-    mytree = ttk.Treeview(root)
-    
-    mytree['columns'] = ("Name", "ID", "Bank")
-    
-    mytree.column("#0", width=120, minwidth=25)
-    mytree.column("Name", anchor=W, width=120)
-    mytree.column("ID", anchor=CENTER, width=80)
-    mytree.column("Bank", anchor=W, width=120)
-    
-    mytree.heading("#0", text="Label", anchor=W)
-    mytree.heading("Name", text="UserName", anchor=W)
-    mytree.heading("ID", text="ID", anchor=CENTER)
-    mytree.heading("Bank", text="Bank Name", anchor=W)
-    
-    #add data
-    mytree.insert(parent='', index='end', iid=0, text="Parent", values=(username))
-    mytree.grid(row=40, column=0)
-'''
 clickd = StringVar()
 clickd.set([company_query()[0]])
 p = (clickd.set([company_query()[0]]))
@@ -212,8 +167,6 @@ clickA = StringVar()
 
 clickB = StringVar()
 
-
-#print(p)
 
 drp = OptionMenu(root, clickd, *company_query())
 drp.grid(row=0, column=0)
@@ -228,31 +181,9 @@ myb2.grid(row=7, column=0)
 
 myb3 = Button(root, text="Disable Users", command=show3)
 myb3.grid(row=8, column=0)
-'''
-myb4 = Button(root, text="show", command=show4)
-myb4.grid(row=10, column=0)
-'''
 
 count1 = sql_count(show())
-print('****************************', count1)
 
-'''
-#print(show())
-#companyname = input("Bank_name:")
-status1 = str(input("susbend a or active b\t:"))
-#comp1 = companyname
-#sql_select(con, comp1)
-#count1 = sql_count()
-suspend = "a"
-reinstate = "b"
-if status1 == suspend:
-   status1 = "suspend"
-   print("Confirming of Users Status", status1)
-else:
-   status1 = "reinstate"
-   print("Confirming of Users Status", status1)
-count2 = int(count1)
-print("TOTAL", count2)
-'''
 
+root.mainloop()
 
