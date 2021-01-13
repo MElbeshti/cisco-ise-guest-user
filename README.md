@@ -1,7 +1,8 @@
 # cisco-ISE-Guestuser-Gui
 hi Github Users
 Since this is my first post on the GitHub community, I want your help and support
-I am creating a small Cisco ise GUI python token with the following features:
+I am creating a small Cisco ise python Code (ISEALLGUser.py) with the following features:
+
 Get a list of three main information from cisco ise guest users (company name, username, id) and save them in sqlite3 DB
 
 
@@ -16,7 +17,11 @@ CREATE TABLE "company_name" (
 );
 
 
-and the cisco ISE guide i use is:
+then the seconde code (ISEGG.py) is small GUI to enable/disable guest users by Company name.
+
+
+
+the cisco ISE guide i use is:
 
 
 https://www.cisco.com/c/en/us/support/docs/security/identity-services-engine/215476-configure-ise-guest-accounts-with-rest-a.html 
@@ -24,7 +29,6 @@ https://www.cisco.com/c/en/us/support/docs/security/identity-services-engine/215
 Cisco ISE 2.4
 
 
-there is another code i will share soon for enableing/disableing guest users by Company name.
 
 Anyone welcome to modify the code for enhancement & Optimization.
 
