@@ -19,7 +19,9 @@ CREATE TABLE "company_name" (
 and the cisco ISE guide i use is:
 
 
+https://www.cisco.com/c/en/us/support/docs/security/identity-services-engine/215476-configure-ise-guest-accounts-with-rest-a.html 
 
+Cisco ISE 2.4
 
 
 there is another code i will share soon for enableing/disableing guest users by Company name.
