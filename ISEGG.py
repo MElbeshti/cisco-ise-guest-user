@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 import sqlite3
 import requests
 import urllib3
@@ -160,8 +161,7 @@ def show3():
 
 
 clickd = StringVar()
-clickd.set([company_query()[0]])
-p = (clickd.set([company_query()[0]]))
+clickd.set(company_query()[0])
 
 clickA = StringVar()
 
